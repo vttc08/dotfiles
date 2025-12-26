@@ -1,0 +1,66 @@
+alias ll="ls -lah"
+alias ip="ip -c"
+
+# Docker and user onfiguration
+export PUID=$(id -u)
+export PGID=$(id -u)
+export NETDEV=$(ip --color=never -o r get 8.8.8.8 | awk '{print $5}')
+TSIP=$(tailscale ip -4 2>/dev/null)
+export TSIP=${TSIP:-"127.0.0.1"}
+
+alias dc="docker compose"
+
+alias c..="sudo chown -R $(id -u):$(id -g) ."
+
+alias iftop="sudo iftop -i $(ip --color=never -o r get 8.8.8.8 | awk '{print $5}')"
+
+function dl-fn {
+    docker logs -f -n 200 "$1"
+}
+
+alias dlog='dl-fn'
+
+secret() {
+    local len="${1:-48}"   # default to 48 if no argument
+    tr -dc 'A-Za-z0-9' </dev/urandom | head -c "$len"
+    echo
+}
+
+
+_dlog_autocomplete() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=($(compgen -W "$(docker ps -a --format '{{.Names}}')" -- "$cur"))
+}
+
+complete -F _dlog_autocomplete dlog
+
+# Oh my posh and tmux color configuration
+HOSTNAME=$(hostname)
+case $HOSTNAME in
+   racknerd*|vultr*|linode*|digitalocean*)
+        export _OMP_COLOR="lightCyan"
+        export TMUX_SESSION_FG="colour81"
+        ;;
+   oracle*)
+        export _OMP_COLOR="lightMagenta"
+        export TMUX_SESSION_FG="colour135"
+        ;;
+   *server|home*)
+        export _OMP_COLOR="lightGreen"
+        export TMUX_SESSION_FG="colour48"
+        ;;
+   proxmox|pve|vm*|lxc*)
+        export _OMP_COLOR="#EF5F39"
+        export TMUX_SESSION_FG="colour9"
+        ;;
+   *)
+        export _OMP_COLOR="lightYellow"
+        export TMUX_SESSION_FG="colour220"
+        ;;
+esac
+
+
+# Additional configuration (tealdeer, shy)
+alias shy="~/venv/bin/shy"
+alias tldf='tldr --list | fzf --preview "tldr {1} --color=always" --preview-window=right,75% | xargs tldr'
+
