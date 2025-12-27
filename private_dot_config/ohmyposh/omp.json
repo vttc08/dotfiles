@@ -1,0 +1,84 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "properties": {
+            "always_enabled": true
+            },
+            "template": "{{ if and (gt .Code 0) (ne .Shell \"zsh\") (ne .Code 130) }}<#ff0000>✘ {{ .Code }} </>{{ else if eq .Shell \"zsh\" }}{{ else }}<#23d18b></>{{ end }}",
+          "style": "plain",
+          "type": "status"
+        },
+        {
+          "foreground": "#ffffff",
+          "leading_diamond": "\u250b",
+          "properties": {
+            "style": "dallas",
+            "threshold": 150
+          },
+          "style": "diamond",
+          "template": "{{ if ne .Shell \"zsh\" }} {{ .FormattedMs }} {{ end }}",
+          "type": "executiontime"
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "segments": [
+        {
+            "foreground": "lightCyan",
+            "style": "plain",
+            "template": "{{ $color := (.Env._OMP_COLOR | default \"lightGreen\") }}<{{ $color }}><b>{{ .UserName }}@{{ .HostName }}</b></>",
+          "type": "session"
+        },
+        {
+          "foreground": "lightBlue",
+          "style": "plain",
+          "properties" : {
+						"style": "full",
+						"mapped_locations": {
+							"~/docker": "🐋",
+              "~/projects": "💻",
+              "/mnt/nvme/share": "🗄️",
+              "~/Documents": "📄"
+						}
+					},
+					"template": " {{ .Path }}",
+          "type": "path"
+        }
+      ],
+      "type": "prompt"
+    },
+		{
+			"alignment": "right",
+			"segments": [
+        {
+          "foreground": "#ffffff",
+          "leading_diamond": "\u250b",
+          "properties": {
+            "style": "amarillo",
+            "threshold": 150
+          },
+          "style": "diamond",
+          "template": " {{ .FormattedMs }} ",
+          "type": "executiontime"
+        },
+        {
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "plain",
+          "template": " {{ if gt .Code 0 }}<#ff0000>✘ {{ .Code }}</>{{ else }}<#23d18b></>{{ end }} ",
+          "type": "status"
+        }
+			],
+			"type": "rprompt"
+		}
+  ],
+  "final_space": true,
+  "version": 3
+}                                                           
