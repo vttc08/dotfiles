@@ -1,0 +1,6 @@
+[user]
+        email = hukevin69@gmail.com
+        name = Kevin Hu
+
+[alias]
+        logg = log --oneline
