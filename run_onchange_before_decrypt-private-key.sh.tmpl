@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ ! -f "$HOME/key.txt" ]; then
+    chezmoi age decrypt --output "$HOME/key.txt"  --passphrase "{{ .chezmoi.sourceDir }}/key.txt.age"
+    chmod 600 "$HOME/key.txt"
+fi
