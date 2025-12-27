@@ -1,0 +1,84 @@
+colorscheme habamax 
+set encoding=utf-8
+set mouse=a
+set ttymouse=xterm2
+" Compatibility with Windows Terminal
+syntax on
+set termguicolors 
+
+" Line Numbers
+set number 
+set relativenumber
+ 
+augroup numbertoggle " relative and absolute num based on mode
+  autocmd!
+  autocmd InsertEnter * set norelativenumber
+  autocmd InsertLeave * set relativenumber
+augroup END
+
+set cursorline
+set showcmd
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+" Tabs
+set smartindent
+set shiftwidth=4              " Number of spaces for autoindenti
+set tabstop=2 " 2 spaces when tabbing
+set expandtab " convert tab into spaces
+
+" Search
+set incsearch                 " Highlight search matches as you type
+set hlsearch                  " Highlight all search matches
+set ignorecase                " Ignore case when searching
+set smartcase                 " Override ignorecase when uppercase letters are used
+" cancel highlighting after pressing return
+nnoremap <CR> :noh<CR><CR>    
+
+" Files
+set autoread
+set undofile                  " Enable persistent undo
+set noswapfile
+set nobackup
+set nowritebackup
+set undofile
+set undodir=~/.vim/undo//
+" Performance
+set lazyredraw
+
+" Macro
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+" Map Esc-j so it works in Windows terminal
+nnoremap <Esc>j :m .+1<CR>==
+nnoremap <Esc>k :m .-2<CR>==
+" Windows Terminal alt-arrow
+nnoremap <Esc>[1;3A :m .-2<CR>==
+xnoremap <Esc>[1;3A :m '<-2<CR>gv=gv
+nnoremap <Esc>[1;3B :m .+1<CR>==
+xnoremap <Esc>[1;3B :m '>+1<CR>gv=gvi
+" Tabby Terminal
+nnoremap <Esc>[1;5A :m .-2<CR>==
+nnoremap <Esc>[1;5B :m .+1<CR>==
+
+" ========== Duplicate Line UP ==========
+" Windows Terminal / Tabby
+nnoremap <Esc>[1;4A :t.-1<CR>
+xnoremap <Esc>[1;5A :m '<-2<CR>gv=gv
+" PuTTY fallback (^[^[)
+nnoremap <Esc><Esc>[A :t.-1<CR>
+xnoremap <Esc>[1;5B :m '>+1<CR>gv=gv
+" ========== Duplicate Line DOWN ==========
+" Windows Terminal / Tabby
+nnoremap <Esc>[1;4B :t.<CR>
+" PuTTY fallback
+nnoremap <Esc><Esc>[B :t.<CR>
+
+" Copy via osc52
+source ~/.vim/bundle/vim-osc52/plugin/osc52.vim
+vmap <C-c> y:call SendViaOSC52(getreg('"'))<cr>
+
+if system('uname -r') =~ "Microsoft"
+  augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+  augroup END
+endif
