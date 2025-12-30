@@ -1,0 +1,51 @@
+
+set softwrap
+set atblanks
+
+set autoindent
+set trimblanks
+set tabsize 2
+set tabstospaces
+extendsyntax makefile tabgives " "
+
+set cutfromcursor
+set zap
+
+set smarthome
+
+set nonewlines
+
+# editor
+
+set minibar
+set indicator
+set linenumbers
+set positionlog
+set constantshow
+set stateflags
+
+set mouse
+
+set backup
+set historylog
+
+set multibuffer
+
+# colors
+
+set titlecolor bold,white,latte
+set statuscolor white,latte
+set errorcolor bold,lightwhite,red
+set selectedcolor lightwhite,slate
+set stripecolor ,yellow
+set scrollercolor latte
+set numbercolor latte
+set keycolor latte
+set functioncolor lightblack
+set minicolor bold,white,latte
+set promptcolor bold,white,latte
+
+# key bindings
+
+bind M-/ comment main
+bind M-w copy all
