@@ -61,6 +61,10 @@ esac
 
 
 # Additional configuration (tealdeer, shy)
-alias shy="~/venv/bin/shy"
+alias shy="~/.venv/bin/shy"
 alias tldf='tldr --list | fzf --preview "tldr {1} --color=always" --preview-window=right,75% | xargs tldr'
+
+# mediaserver
+alias hdd="watch --color bash /srv/scripts/hdd"
+
 

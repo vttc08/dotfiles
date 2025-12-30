@@ -129,3 +129,5 @@ fi
 eval "$(~/.local/bin/oh-my-posh init bash --config ~/.config/ohmyposh/omp.json)"
 
 eval "$(zoxide init --cmd cd bash)"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
