@@ -1,0 +1,29 @@
+packages:
+  server:
+    - htop
+    - iftop
+    - curl
+    - gnupg
+    - wget
+    - ca-certificates
+    - lsb-release
+    - openssh-server
+    - at
+    - tmux
+    - screen
+    - bash-completion
+    - vim
+    - nano
+    - git
+    - ntp
+  home:
+    - iotop
+    - fio
+    - powertop
+    - sqlite3
+  mediaserver:
+    - hdparm
+    - hd-idle
+    - ntfs-3g
+  oracle:
+    - firewalld

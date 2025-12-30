@@ -1,0 +1,16 @@
+key.txt.age
+{{ if ne .chezmoi.os "windows" }}
+*.ps1
+{{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+dot_bashrc
+dot_bash_aliases
+dot_tmux.conf
+dot_vim/
+dot_nanorc
+private_dot_config
+*.sh
+{{ end }}
+
+
