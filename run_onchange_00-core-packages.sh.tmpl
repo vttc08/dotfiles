@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# .chezmoidata.yaml hash: {{ include ".chezmoidata.yaml" | sha256sum }}
+
+install_pkg() {
+  if command -v apt >/dev/null; then
+    sudo apt install -y "$@"
+  elif command -v pacman >/dev/null; then
+    sudo pacman -S --noconfirm "$@"
+  elif command -v dnf >/dev/null; then
+    sudo dnf install -y "$@"
+  fi
+}
+
+PACKAGES_SERVER="{{ join " " .packages.server }}"
+PACKAGES_HOME="{{ join " " .packages.home }}"
+PACKAGES_MEDIASERVER="{{ join " " .packages.mediaserver }}"
+PACKAGES_ORACLE="{{ join " " .packages.oracle }}"
+
+
+if [[ {{ .chezmoi.os }} == "linux" ]]; then
+  install_pkg $PACKAGES_SERVER
+fi
+
+mem=$(grep MemTotal /proc/meminfo | awk '{print $2}')
+
+if [[ $mem -gt 4000000 || {{ .chezmoi.hostname }} =~ ub|deb|test ]]; then
+  install_pkg $PACKAGES_HOME
+fi
+
+if [[ {{ .chezmoi.hostname }} == "mediaserver" ]]; then
+  install_pkg $PACKAGES_MEDIASERVER
+fi
+
+if [[ {{ .chezmoi.hostname }} =~ "oracle" ]]; then
+  install_pkg $PACKAGES_ORACLE
+fi
+

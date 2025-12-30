@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Install additional useful packages other than using apt
+
+set -e
+
+# oh-my-posh
+if ! command -v oh-my-posh >/dev/null 2>&1; then
+curl -fsSL https://ohmyposh.dev/install.sh | bash -s
+fi
+
+# zoxide
+if ! command -v zoxide > /dev/null; then
+  curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+fi
+
+# fzf
+if ! command -v fzf > /dev/null; then
+  [[ -d ~/.fzf ]] && rm -rf ~/.fzf # prevent errors from cloning
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  yes | ~/.fzf/install --all
+fi
+
+# tealdeer
+if ! command -v tldr > /dev/null; then
+  curl -s https://api.github.com/repos/tealdeer-rs/tealdeer/releases/latest \
+    | grep browser_download_url.*linux-x86_64-musl \
+    | grep -v sha256 \
+    | cut -d : -f 2,3 \
+    | tr -d \" \
+    | wget -qi -
+  chmod +x tealdeer-linux-x86_64-musl
+  sudo mv tealdeer-linux-x86_64-musl /usr/bin/tldr
+  # Install bash completion
+  curl -s https://api.github.com/repos/tealdeer-rs/tealdeer/releases/latest \
+    | grep browser_download_url.*completions_bash \
+    | cut -d : -f 2,3 \
+    | tr -d \" \
+    | wget -qi -
+  sudo mv completions_bash /usr/share/bash-completion/completions/tldr
+  mkdir -p ~/.local/share/tealdeer/pages
+  tldr --update
+fi
+
+ 
