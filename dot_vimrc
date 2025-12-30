@@ -1,8 +1,12 @@
+if isdirectory(expand('~/.vim/pack/plugins/opt/chezmoi.vim'))
+  packadd chezmoi.vim
+endif
 colorscheme habamax 
 set encoding=utf-8
 set mouse=a
 set ttymouse=xterm2
 " Compatibility with Windows Terminal
+filetype on
 syntax on
 set termguicolors 
 
@@ -21,7 +25,7 @@ set showcmd
 autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 " Tabs
 set smartindent
-set shiftwidth=4              " Number of spaces for autoindenti
+set shiftwidth=2              " Number of spaces for autoindent
 set tabstop=2 " 2 spaces when tabbing
 set expandtab " convert tab into spaces
 
@@ -81,4 +85,8 @@ if system('uname -r') =~ "Microsoft"
     autocmd!
     autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
   augroup END
+endif
+
+if filereadable('~/.vim/pack/plugins/opt/chezmoi.vim')
+  packadd chezmoi.vim
 endif
