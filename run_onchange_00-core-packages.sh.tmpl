@@ -17,8 +17,6 @@ install_pkg() {
 PACKAGES_SERVER="{{ join " " .packages.server }}"
 PACKAGES_HOME="{{ join " " .packages.home }}"
 PACKAGES_MEDIASERVER="{{ join " " .packages.mediaserver }}"
-PACKAGES_ORACLE="{{ join " " .packages.oracle }}"
-
 
 if [[ {{ .chezmoi.os }} == "linux" ]]; then
   install_pkg $PACKAGES_SERVER
@@ -32,9 +30,5 @@ fi
 
 if [[ {{ .chezmoi.hostname }} == "mediaserver" ]]; then
   install_pkg $PACKAGES_MEDIASERVER
-fi
-
-if [[ {{ .chezmoi.hostname }} =~ "oracle" ]]; then
-  install_pkg $PACKAGES_ORACLE
 fi
 
