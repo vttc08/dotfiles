@@ -1,6 +1,7 @@
-if isdirectory(expand('~/.vim/pack/plugins/opt/chezmoi.vim'))
+if isdirectory(expand('~/.vim/pack/alker0/chezmoi.vim'))
   packadd chezmoi.vim
 endif
+set term=xterm-256color
 colorscheme habamax 
 set encoding=utf-8
 set mouse=a
