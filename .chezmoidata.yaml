@@ -25,5 +25,3 @@ packages:
     - hdparm
     - hd-idle
     - ntfs-3g
-  oracle:
-    - firewalld
