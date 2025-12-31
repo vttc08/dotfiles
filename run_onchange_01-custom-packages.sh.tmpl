@@ -22,24 +22,52 @@ if ! command -v fzf > /dev/null; then
 fi
 
 # tealdeer
+# tealdeer
 if ! command -v tldr > /dev/null; then
+  ARCH="$(uname -m)"
+  case "$ARCH" in
+    x86_64|amd64)
+      ASSET_RE="linux-x86_64-musl"
+      OUT="tealdeer-linux-x86_64-musl"
+      ;;
+    aarch64|arm64)
+      ASSET_RE="linux-aarch64-musl"
+      OUT="tealdeer-linux-aarch64-musl"
+      ;;
+    armv7l|armv7|armhf)
+      ASSET_RE="linux-arm-musleabihf"
+      OUT="tealdeer-linux-arm-musleabihf"
+      ;;
+    armv6l|armv6)
+      ASSET_RE="linux-arm-musleabi"
+      OUT="tealdeer-linux-arm-musleabi"
+      ;;
+    *)
+      echo "Unsupported architecture: $ARCH" >&2
+      exit 1
+      ;;
+  esac
+
+  # Download correct binary
   curl -s https://api.github.com/repos/tealdeer-rs/tealdeer/releases/latest \
-    | grep browser_download_url.*linux-x86_64-musl \
+    | grep "browser_download_url.*${ASSET_RE}" \
     | grep -v sha256 \
     | cut -d : -f 2,3 \
     | tr -d \" \
     | wget -qi -
-  chmod +x tealdeer-linux-x86_64-musl
-  sudo mv tealdeer-linux-x86_64-musl /usr/bin/tldr
+
+  chmod +x "$OUT"
+  sudo mv "$OUT" /usr/bin/tldr
+
   # Install bash completion
   curl -s https://api.github.com/repos/tealdeer-rs/tealdeer/releases/latest \
     | grep browser_download_url.*completions_bash \
     | cut -d : -f 2,3 \
     | tr -d \" \
     | wget -qi -
+
   sudo mv completions_bash /usr/share/bash-completion/completions/tldr
   mkdir -p ~/.local/share/tealdeer/pages
   tldr --update
 fi
 
- 
