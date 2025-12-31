@@ -15,7 +15,7 @@ packages:
     - vim
     - nano
     - git
-    - ntp
+    - unzip
   home:
     - iotop
     - fio
