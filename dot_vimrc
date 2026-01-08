@@ -8,7 +8,6 @@ set ttymouse=xterm2
 " Compatibility with Windows Terminal
 filetype on
 syntax on
-set termguicolors 
 
 " Line Numbers
 set number 
