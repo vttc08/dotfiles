@@ -3,9 +3,9 @@ alias ip="ip -c"
 
 # Docker and user onfiguration
 export PUID=$(id -u)
-export PGID=$(id -u)
+export PGID=$(id -g)
 export NETDEV=$(ip --color=never -o r get 8.8.8.8 | awk '{print $5}')
-TSIP=$(tailscale ip -4 2>/dev/null)
+TSIP=$(timeout 0.1 tailscale ip -4 2>/dev/null)
 export TSIP=${TSIP:-"127.0.0.1"}
 
 alias dc="docker compose"
