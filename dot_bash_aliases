@@ -67,4 +67,4 @@ alias tldf='tldr --list | fzf --preview "tldr {1} --color=always" --preview-wind
 # mediaserver
 alias hdd="watch --color bash /srv/scripts/hdd"
 
-
+alias fix="source ~/.bashrc"
