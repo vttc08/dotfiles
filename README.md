@@ -7,10 +7,11 @@ This is the dotfiles configuration for Linux server configurations using [Chezmo
 Install and initialize
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply --ssh vttc08
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply vttc08
+sudo cp bin/chezmoi /usr/local/bin/chezmoi
 ``` 
 
-For `chezmoi` to work, must restart the shell.
+Chezmoi will fail because it's not found in path, therefore age decryption fails too.
 
 ```bash
 chezmoi init --apply --ssh vttc08
@@ -19,6 +20,7 @@ chezmoi init --apply --ssh vttc08
 Manually run a failed script that is a template
 
 ```bash
+chezmoi execute-template < run_onchange_00-core-packages.sh.tmpl | bash
 chezmoi execute-template < run_onchange_01-custom-packages.sh.tmpl | bash
 ``` 
 
