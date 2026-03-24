@@ -1,6 +1,11 @@
 alias ll="ls -lah"
 alias ip="ip -c"
 
+# Source everything else
+if [[ -d ~/.rc.local && -n "$(ls -A ~/.rc.local)" ]]; then
+  for f in ~/.rc.local/*.sh; do [ -f "$f" ] && source $f; done
+fi
+
 # Docker and user onfiguration
 export PUID=$(id -u)
 export PGID=$(id -g)
