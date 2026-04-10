@@ -18,6 +18,7 @@ alias dc="docker compose"
 alias c..="sudo chown -R $(id -u):$(id -g) ."
 
 alias iftop="sudo iftop -i $(ip --color=never -o r get 8.8.8.8 | awk '{print $5}')"
+alias iotop="sudo iotop -o"
 
 function dl-fn {
     docker logs -f -n 200 "$1"
