@@ -16,6 +16,7 @@ packages:
     - nano
     - git
     - unzip
+    - command-not-found  
   home:
     - iotop
     - fio
