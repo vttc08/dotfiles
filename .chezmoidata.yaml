@@ -5,6 +5,7 @@ packages:
     - curl
     - gnupg
     - wget
+    - rsync
     - ca-certificates
     - lsb-release
     - openssh-server
