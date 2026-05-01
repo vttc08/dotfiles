@@ -7,14 +7,14 @@ This is the dotfiles configuration for Linux server configurations using [Chezmo
 Install and initialize
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply vttc08
+sh -c "$(curl -fsLS get.chezmoi.io)"
 sudo cp bin/chezmoi /usr/local/bin/chezmoi
 ``` 
 
-Chezmoi will fail because it's not found in path, therefore age decryption fails too.
+Chezmoi will fail because it's not found in path, therefore age decryption fails too. Requires manual install before the next command.
 
 ```bash
-chezmoi init --apply --ssh vttc08
+chezmoi init --apply vttc08
 ```
 
 Manually run a failed script that is a template
