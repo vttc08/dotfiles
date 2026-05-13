@@ -132,7 +132,7 @@ fi
 
 # Auto-start tmux on interactive SSH
 if [[ -n "$SSH_CONNECTION" && -z "$TMUX" && $- == *i* && -z $NOTMUX ]]; then
-  tmux attach -t main || tmux new -s main
+  tmux attach || tmux new -s main
 fi
 
 if command -v oh-my-posh > /dev/null 2>&1; then
