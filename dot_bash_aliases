@@ -76,3 +76,12 @@ if [[ -d ~/.rc.local && -n "$(ls -A ~/.rc.local)" ]]; then
   for f in ~/.rc.local/*.sh; do [ -f "$f" ] && source $f; done
 fi
 
+export HISTSIZE=100000
+export HISTFILESIZE=200000
+export HISTCONTROL=ignoredups:erasedups
+export HISTTIMEFORMAT="%F %T "
+
+# Sync history between tmux panes/sessions immediately
+PROMPT_COMMAND+=("history -a")
+PROMPT_COMMAND+=("history -n")
+
