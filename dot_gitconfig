@@ -2,5 +2,8 @@
         email = hukevin69@gmail.com
         name = Kevin Hu
 
+[init]
+        defaultBranch = main
+
 [alias]
         logg = log --oneline
