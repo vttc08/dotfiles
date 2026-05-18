@@ -7,6 +7,15 @@ set mouse=a
 set ttymouse=xterm2
 set pastetoggle=<F2>
 
+" fzf
+set rtp+=~/.fzf
+
+let g:fzf_action = {
+  \ 'enter': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+nnoremap <C-p> :FZF<CR>
+
 " Compatibility with Windows Terminal
 filetype on
 syntax on
@@ -44,8 +53,17 @@ set undofile                  " Enable persistent undo
 set noswapfile
 set nobackup
 set nowritebackup
+
+" Undo
 set undofile
-set undodir=~/.vim/undo//
+set undodir=$HOME/.vim/undo
+
+let undoDir = $HOME . "/.vim/undo"
+
+if !isdirectory(undoDir)
+    call mkdir(undoDir, "p", 0700)
+endif
+
 " Performance
 set lazyredraw
 

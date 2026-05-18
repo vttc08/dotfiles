@@ -140,3 +140,5 @@ eval "$(zoxide init --cmd cd bash)"
 alias z="cd"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND='find . -type d \( -name node_modules -o -name .git -o -name .venv -o -name venv \) -prune -o -type f -print'
+
