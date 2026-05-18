@@ -36,6 +36,26 @@ _dlog_autocomplete() {
 
 complete -F _dlog_autocomplete dlog
 
+# Clipboard
+clip() {
+    tee /dev/tty | printf '\033]52;c;%s\a' "$(base64 | tr -d '\n')"
+}
+
+_mclip() {
+  local b64
+  b64="$(base64 | tr -d '\n')"
+  printf '\033Ptmux;\033\033]52;c;%s\a\033\\' "$b64"
+}
+
+mclip() {
+  tee /dev/tty | _mclip
+}
+
+# From clipboard to file
+ceof() {
+  cat > "$1"
+}
+
 # Oh my posh and tmux color configuration
 HOSTNAME=$(hostname)
 case $HOSTNAME in
