@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Initialize dircolors and remove background for 777 folders
+
+DIRCOLORS="${HOME}/.dircolors"
+
+[[ -f "$DIRCOLORS" ]] || dircolors -p > "$DIRCOLORS"
+
+# Extract DIR color value (robust against extra spaces/tabs)
+DIR=$(awk '/^DIR/ {print $2; exit}' "$DIRCOLORS" || true)
+
+if [ -z "$DIR" ]; then
+	echo "ERROR: DIR color not found in $DIRCOLORS" >&2
+	exit 1
+fi
+
+# Replace or add OTHER_WRITABLE to match DIR, using a safe temp file
+awk -v d="$DIR" '
+	BEGIN {found=0}
+	/^OTHER_WRITABLE/ {print "OTHER_WRITABLE=" d; found=1; next}
+	{print}
+	END { if (!found) print "OTHER_WRITABLE=" d }
+' "$DIRCOLORS" > "${DIRCOLORS}.tmp" && mv "${DIRCOLORS}.tmp" "$DIRCOLORS"
+
