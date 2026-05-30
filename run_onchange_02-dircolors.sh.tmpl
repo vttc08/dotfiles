@@ -19,8 +19,8 @@ fi
 # Replace or add OTHER_WRITABLE to match DIR, using a safe temp file
 awk -v d="$DIR" '
 	BEGIN {found=0}
-	/^OTHER_WRITABLE/ {print "OTHER_WRITABLE=" d; found=1; next}
+	/^OTHER_WRITABLE/ {print "OTHER_WRITABLE " d; found=1; next}
 	{print}
-	END { if (!found) print "OTHER_WRITABLE=" d }
+	END { if (!found) print "OTHER_WRITABLE " d }
 ' "$DIRCOLORS" > "${DIRCOLORS}.tmp" && mv "${DIRCOLORS}.tmp" "$DIRCOLORS"
 
