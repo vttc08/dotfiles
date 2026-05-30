@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Update visudo file to allow passwordless sudo for the user
+
+user=$(whoami)
+
+[[ $user == "root" || -z "$user" ]] && exit 0
+
+# Check if the user already has passwordless sudo
+if sudo -l -U "$user" 2>/dev/null | grep -q "NOPASSWD: ALL"; then
+    echo "User $user already has passwordless sudo access."
+    exit 0
+fi
+
+# Add the user to the sudoers file with NOPASSWD
+echo "$user ALL=(ALL) NOPASSWD: ALL" | sudo tee "/etc/sudoers.d/$user" > /dev/null
+echo "User $user has been granted passwordless sudo access."
