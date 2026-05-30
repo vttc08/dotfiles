@@ -4,6 +4,12 @@ This is the dotfiles configuration for Linux server configurations using [Chezmo
 
 ### Instructions
 
+Install dependencies
+
+```bash
+command -v sudo && sudo apt update; sudo apt install curl git -y || apt update; apt install sudo curl git -y
+```
+
 Install and initialize
 
 ```bash
