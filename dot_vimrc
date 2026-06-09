@@ -7,6 +7,9 @@ set mouse=a
 set ttymouse=xterm2
 set pastetoggle=<F2>
 
+" autosave root
+cnoremap w!! w !sudo tee % >/dev/null
+
 " fzf
 set rtp+=~/.fzf
 
