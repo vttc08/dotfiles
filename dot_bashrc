@@ -126,7 +126,7 @@ if [[ $0 == *bash* ]]; then
 fi
 
 # Auto-start tmux on interactive SSH
-if [[ -n "$SSH_CONNECTION" && -z "$TMUX" && $- == *i* && -z $NOTMUX ]]; then
+if [[ -n "$SSH_CONNECTION" && -z "$TMUX" && $- == *i* && -z $NOTMUX && "$TERM_PROGRAM" != "vscode" ]]; then
   tmux attach || tmux new -s main
 fi
 
