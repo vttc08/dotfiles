@@ -90,6 +90,8 @@ alias tldf='tldr --list | fzf --preview "tldr {1} --color=always" --preview-wind
 alias hdd="watch --color bash /srv/scripts/hdd"
 
 alias fix="source ~/.bashrc"
+alias f="fix"
+alias fox="fix"
 
 # Source everything else
 if [[ -d ~/.rc.local && -n "$(ls -A ~/.rc.local)" ]]; then
