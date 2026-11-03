@@ -92,6 +92,14 @@ alias hdd="watch --color bash /srv/scripts/hdd"
 alias fix="source ~/.bashrc"
 alias f="fix"
 alias fox="fix"
+alias fiz="fix"
+alias fux="fix"
+
+# Other
+alias cd..="cd .."
+mkd() {
+    mkdir -p "$1" && cd "$1"
+}
 
 # Source everything else
 if [[ -d ~/.rc.local && -n "$(ls -A ~/.rc.local)" ]]; then
