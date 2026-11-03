@@ -1,9 +1,17 @@
 [user]
-        email = hukevin69@gmail.com
-        name = Kevin Hu
+  email = hukevin69@gmail.com
+  name = Kevin Hu
 
 [init]
-        defaultBranch = main
+  defaultBranch = main
 
 [alias]
-        logg = log --oneline
+  logg = log --oneline
+
+[include]
+  path = ~/.config/git/local.gitconfig
+
+# Setup gh command manually
+# [credential "https://github.com"]
+#        helper =
+#        helper = !/snap/gh/751/gh auth git-credential
