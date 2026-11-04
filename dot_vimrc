@@ -4,7 +4,6 @@ endif
 colorscheme habamax 
 set encoding=utf-8
 set mouse=a
-set ttymouse=xterm2
 set pastetoggle=<F2>
 
 " autosave root
