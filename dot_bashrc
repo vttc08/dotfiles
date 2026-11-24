@@ -126,7 +126,7 @@ if [[ $0 == *bash* ]]; then
 fi
 
 # Auto-start tmux on interactive SSH
-if [[ -n "$SSH_CONNECTION" && -z "$TMUX" && $- == *i* && -z $NOTMUX && "$TERM_PROGRAM" != "vscode" ]]; then
+if [[ -n "$SSH_CONNECTION" && -z "$HERDR_ENV" && -z "$TMUX" && $- == *i* && -z $NOTMUX && "$TERM_PROGRAM" != "vscode" ]]; then
   tmux attach || tmux new -s main
 fi
 
@@ -136,8 +136,12 @@ fi
 
 eval "$(chezmoi completion bash)"
 
-eval "$(zoxide init --cmd cd bash)"
-alias z="cd"
+# Skip in non-interactive/agent shells: Claude Code snapshots the cd() override
+# without PROMPT_COMMAND, which triggers zoxide doctor warnings on every cd.
+if [[ $- == *i* && -z $CLAUDECODE ]]; then
+  eval "$(zoxide init --cmd cd bash)"
+  alias z="cd"
+fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='find . -type d \( -name node_modules -o -name .git -o -name .venv -o -name venv \) -prune -o -type f -print'
